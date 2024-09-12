@@ -15,5 +15,13 @@ router.get('/', async () => {
     hello: 'world',
   }
 })
-router.post('/register', [AuthController, 'register'])
-router.post('/login', [AuthController, 'login'])
+
+// router.post('/register', [AuthController, 'register'])
+// router.post('/login', [AuthController, 'login'])
+
+router
+  .group(() => {
+    router.post('register', [AuthController, 'register'])
+    router.post('/login', [AuthController, 'login'])
+  })
+  .prefix('user')

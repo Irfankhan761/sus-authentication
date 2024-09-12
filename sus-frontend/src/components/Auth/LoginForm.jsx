@@ -14,7 +14,7 @@ export default function LoginComp() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:3333/login', {
+      const res = await axios.post('http://localhost:3333/user/login', {
         email,
         password
       });

@@ -13,8 +13,10 @@ export default class AuthController {
 
   async login({ request, response }: HttpContext) {
     const { email, password } = await request.validateUsing(loginValidator)
+    console.log('Validation passed:', email, password)
 
     const { token, user } = await AuthService.login(email, password)
+    console.log(token + '....' + user)
     return response.ok({
       token: token,
       ...user.serialize(),
