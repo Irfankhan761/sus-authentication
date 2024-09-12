@@ -1,0 +1,69 @@
+services:
+  backend:
+    build:
+      context: ../sus-backend
+      dockerfile: Dockerfile
+    ports:
+      - 3333:3333
+    volumes:
+      - ../sus-backend:/usr/src/app
+      - backend-data:/usr/src/app/node_modules
+    depends_on:
+      - db
+    environment:
+      - DB_CONNECTION=pg
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres  # Change this to your database user
+      - DB_PASSWORD=password  # Change this to your database password
+      - DB_DATABASE=sus_db # Change this to your database name
+      - AUTH_SECRET=your-secret-key 
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres # Change this to your database user
+      POSTGRES_PASSWORD: password # Change this to your database password
+      POSTGRES_DB: sus_db  # Change this to your database name
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  # (Optional) pgadmin for database management
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./dbservers.json:/pgadmin4/servers.json
+    depends_on:
+      - db
+  # (Optional) mailpit for email testing
+  # mailpit:
+  #   image: axllent/mailpit
+  #   ports:
+  #     - 8025:8025
+  #     - 1025:1025
+  #   restart: always
+  frontend:
+    build:
+      context: ../sus-frontend
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      - ../sus-frontend:/app
+      - frontend-data:/app/node_modules
+    command: ["npm", "run", "start"]
+    # environment:
+    #   - CHOKIDAR_USEPOLLING=true
+    restart: always
+volumes:
+  pgdata:
+  pgadmin-data:
+  backend-data:
+  frontend-data:
