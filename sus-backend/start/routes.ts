@@ -8,6 +8,7 @@
 */
 
 const AuthController = () => import('#controllers/auth_controller')
+const ServicespagesController = () => import('#controllers/servicespages_controller')
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
@@ -21,7 +22,15 @@ router.get('/', async () => {
 
 router
   .group(() => {
-    router.post('register', [AuthController, 'register'])
+    router.post('/register', [AuthController, 'register'])
     router.post('/login', [AuthController, 'login'])
   })
   .prefix('user')
+router
+  .group(() => {
+    router.post('/addServiceCard', [ServicespagesController, 'addServiceCard'])
+    router.get('/getServiceCard', [ServicespagesController, 'getServiceCard'])
+    router.put('/updateServiceCard/:id', [ServicespagesController, 'updateServiceCard'])
+    router.delete('/delelteServiceCard/:id', [ServicespagesController, 'delelteServiceCard'])
+  })
+  .prefix('/services')

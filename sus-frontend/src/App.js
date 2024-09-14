@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import { Routes, Route } from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
+import ServicesPage from "./pages/ServicesPage";
 import ContacPage from "./pages/ContactPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/services" element={<ServicesPage />} />
         <Route path="/contact" element={<ContacPage />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
