@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
@@ -70,8 +71,9 @@ export default function ServicesPage() {
               <h2 className="text-xl font-semibold mb-2 text-gray-800">{service.heading}</h2>
               <p className="text-gray-600 mb-4">{service.paragraph}</p>
               <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                Read more
-              </button>
+  <Link to={`/servicesDetail/${service.id}`}>Read more</Link> {/* Pass the correct service ID */}
+</button>
+
             </div>
           </div>
         ))

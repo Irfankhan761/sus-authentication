@@ -5,13 +5,13 @@ export default class Servicesdetail extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare serviceImage: string | null
+  declare service_image: string | null
   @column()
-  declare serviceDetail: string
+  declare service_detail: string
   @column()
-  declare serviceHeading: string
+  declare service_heading: string
   @column()
-  declare serviceDescription: string
+  declare service_description: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

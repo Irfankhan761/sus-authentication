@@ -34,3 +34,13 @@ router
     router.delete('/delelteServiceCard/:id', [ServicespagesController, 'delelteServiceCard'])
   })
   .prefix('/services')
+router
+  .group(() => {
+    router.post('/addServiceDetail', [ServicespagesController, 'addServiceDetail'])
+
+    router.get('/getServiceDetail/:id', [ServicespagesController, 'getServiceDetail'])
+
+    router.put('/updateServiceDetail/:id', [ServicespagesController, 'updateServiceDetail'])
+    router.delete('/deleteServiceDetail/:id', [ServicespagesController, 'deleteServiceDetail'])
+  })
+  .prefix('/servicedetails')
